@@ -59,4 +59,37 @@ btns.forEach(btn => {
             modal.style.display = "none"
         }, 200);
     }
+
+})
+
+// carousel
+
+const tabheader__items = document.querySelectorAll('.tabheader__item')
+const tab__contents = document.querySelectorAll(".tabcontent")
+
+let tabIndex = 0
+
+showtabs()
+function showtabs(n) {
+
+    tab__contents.forEach(el => {
+        el.style.display = "none"
+
+        tab__contents[tabIndex].style.display = "block"
+        tab__contents[tabIndex].classList.add('fade')
+    })
+
+}
+
+tabheader__items.forEach((btn, i) => {
+
+    btn.addEventListener('click', () => {
+
+        document.querySelector('.tabheader__item_active')?.classList.remove('tabheader__item_active')
+        btn.classList.add('tabheader__item_active')
+        tabIndex = i
+        showtabs()
+    })
+
+
 })
