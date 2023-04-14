@@ -37,3 +37,26 @@ offer__slider_prev.onclick = () => {
 
     showSlides(slideIndex)
 }
+// modal
+
+const btns = document.querySelectorAll("button[data-modal]")
+const modal = document.querySelector(".modal")
+const modal_close = document.querySelector(".modal__close")
+
+btns.forEach(btn => {
+
+    btn.onclick = () => {
+        modal.style.display = "block"
+
+        setTimeout(() => {
+            modal.style.opacity = "1"
+        }, 200);
+    }
+    modal_close.onclick = () => {
+        modal.style.opacity = "0"
+
+        setTimeout(() => {
+            modal.style.display = "none"
+        }, 200);
+    }
+})
