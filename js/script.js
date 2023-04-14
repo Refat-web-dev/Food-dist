@@ -65,7 +65,7 @@ btns.forEach(btn => {
 
 })
 
-// carousel
+// tabs
 
 const tabheader__items = document.querySelectorAll('.tabheader__item')
 const tab__contents = document.querySelectorAll(".tabcontent")
