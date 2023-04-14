@@ -18,8 +18,11 @@ function showSlides(n) {
         slideIndex = slides.length - 1
     }
 
-    current.innerHTML = slideIndex + 1
-
+    if (slideIndex.toString().length < 2 && slideIndex.toString() < '9') {
+        current.innerHTML = '0' + (slideIndex + 1)
+    } else {
+        current.innerHTML = slideIndex + 1
+    }
     slides.forEach(el => el.style.display = "none")
 
     slides[slideIndex].style.display = "block"
