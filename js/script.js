@@ -3,10 +3,10 @@
 const slides = document.querySelectorAll('.offer__slide')
 const offer__slider_prev = document.querySelector('.offer__slider-prev')
 const offer__slider_next = document.querySelector('.offer__slider-next')
+const total_slide = document.querySelector('#total')
 const current = document.querySelector('#current')
 
 let slideIndex = 0
-
 showSlides(slideIndex)
 
 function showSlides(n) {
@@ -20,8 +20,16 @@ function showSlides(n) {
 
     if (slideIndex.toString().length < 2 && slideIndex.toString() < '9') {
         current.innerHTML = '0' + (slideIndex + 1)
-    } else {
+    }
+    else {
         current.innerHTML = slideIndex + 1
+    }
+    if (total_slide.innerHTML < '9' && total_slide.innerHTML.length === '1') {
+        console.log(total_slide.innerHTML.length);
+        
+    } else {
+        total_slide.innerHTML = (slides.length.toString().padStart(2, '0'))
+        console.log(total_slide.innerHTML.length);
     }
     slides.forEach(el => el.style.display = "none")
 
