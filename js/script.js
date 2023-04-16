@@ -17,20 +17,9 @@ function showSlides(n) {
     if (slideIndex < 0) {
         slideIndex = slides.length - 1
     }
+    current.innerHTML = slideIndex + 1 < 10 ? '0' + (slideIndex + 1) : slideIndex + 1
+    total_slide.innerHTML = slides.length < 10 ? '0' + slides.length : slides.length
 
-    if (slideIndex.toString().length < 2 && slideIndex.toString() < '9') {
-        current.innerHTML = '0' + (slideIndex + 1)
-    }
-    else {
-        current.innerHTML = slideIndex + 1
-    }
-    if (total_slide.innerHTML < '9' && total_slide.innerHTML.length === '1') {
-        console.log(total_slide.innerHTML.length);
-        
-    } else {
-        total_slide.innerHTML = (slides.length.toString().padStart(2, '0'))
-        console.log(total_slide.innerHTML.length);
-    }
     slides.forEach(el => el.style.display = "none")
 
     slides[slideIndex].style.display = "block"
@@ -103,4 +92,84 @@ tabheader__items.forEach((btn, i) => {
     })
 
 
+})
+
+// calc
+
+const genderBtns = document.querySelectorAll('#gender .calculating__choose-item')
+const inputs = document.querySelectorAll('.calculating__choose_medium .calculating__choose-item')
+const all_act_btns = document.querySelectorAll('.calculating__choose_big .calculating__choose-item')
+const calc_result = document.querySelector('.calculating__result span')
+let BMR = 0
+const user_data = {
+    gender: 'woman'
+}
+
+genderBtns.forEach(btn => (
+    btn.onclick = () => {
+        let gender = btn.getAttribute("data-gender")
+        user_data.gender = gender
+
+        setTimeout(() => {
+            genderBtns.forEach(btn => btn.classList.remove('calculating__choose-item_active'))
+        }, 50);
+
+        setTimeout(() => {
+            btn.classList.add('calculating__choose-item_active')
+        }, 200);
+    }
+))
+
+inputs.forEach(input => [
+    input.oninput = () => {
+        user_data[input.id] = input.value
+    }
+])
+
+all_act_btns.forEach(btn => {
+    btn.onclick = () => {
+        let act = btn.getAttribute('id')
+        user_data.activity = act
+        setTimeout(() => {
+            all_act_btns.forEach(btn => btn.classList.remove('calculating__choose-item_active'))
+        }, 50);
+
+        setTimeout(() => {
+            btn.classList.add('calculating__choose-item_active')
+        }, 200);
+
+
+        inputs.forEach(input => {
+            user_data.gender === 'man' ? BMR = 88.36 + (13.4 * user_data.weight) + (4.8 * user_data.height) - (5.7 * user_data.age) : BMR = 447.6 + (9.2 * user_data.weight) + (3.1 * user_data.height) - (4.3 * user_data.age)
+
+            switch (act) {
+                case 'low':
+                    BMR *= 1.2
+                    break;
+
+                case 'small':
+                    BMR *= 1.375
+                    break;
+
+                case 'medium':
+                    BMR *= 1.55
+                    break;
+
+                case 'high':
+                    BMR *= 1.725
+                    break;
+
+                default:
+                    break;
+            }
+            if (input.value.length === 0) {
+                input.style.backgroundColor = "red"
+                calc_result.innerHTML = '0'
+            }
+            else{
+                input.style.backgroundColor = "#FFF"
+                calc_result.innerHTML = BMR.toFixed()
+            }
+        })
+    }
 })
