@@ -730,6 +730,10 @@ a {
     animation-duration: 1.5s;
 }
 
+.error{
+    background-color: red;
+}
+
 @keyframes fade {
     from {
         opacity: 0.1;

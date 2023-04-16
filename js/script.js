@@ -120,11 +120,45 @@ genderBtns.forEach(btn => (
     }
 ))
 
-inputs.forEach(input => [
+inputs.forEach(input => {
     input.oninput = () => {
         user_data[input.id] = input.value
     }
-])
+    input.onclick = () => {
+        input.classList.remove('error')
+    }
+})
+
+function calculateBMR() {
+    let BMR = 0;
+    switch (user_data.gender) {
+        case 'man':
+            BMR = 88.36 + (13.4 * user_data.weight) + (4.8 * user_data.height) - (5.7 * user_data.age);
+            break;
+        case 'woman':
+            BMR = 447.6 + (9.2 * user_data.weight) + (3.1 * user_data.height) - (4.3 * user_data.age);
+            break;
+        default:
+            break;
+    }
+    switch (user_data.activity) {
+        case 'low':
+            BMR *= 1.2;
+            break;
+        case 'small':
+            BMR *= 1.375;
+            break;
+        case 'medium':
+            BMR *= 1.55;
+            break;
+        case 'high':
+            BMR *= 1.725;
+            break;
+        default:
+            break;
+    }
+    return BMR;
+}
 
 all_act_btns.forEach(btn => {
     btn.onclick = () => {
@@ -138,38 +172,19 @@ all_act_btns.forEach(btn => {
             btn.classList.add('calculating__choose-item_active')
         }, 200);
 
-
+        let allInputsFilled = true;
         inputs.forEach(input => {
-            user_data.gender === 'man' ? BMR = 88.36 + (13.4 * user_data.weight) + (4.8 * user_data.height) - (5.7 * user_data.age) : BMR = 447.6 + (9.2 * user_data.weight) + (3.1 * user_data.height) - (4.3 * user_data.age)
-
-            switch (act) {
-                case 'low':
-                    BMR *= 1.2
-                    break;
-
-                case 'small':
-                    BMR *= 1.375
-                    break;
-
-                case 'medium':
-                    BMR *= 1.55
-                    break;
-
-                case 'high':
-                    BMR *= 1.725
-                    break;
-
-                default:
-                    break;
-            }
-            if (input.value.length === 0) {
-                input.style.backgroundColor = "red"
-                calc_result.innerHTML = '0'
-            }
-            else{
-                input.style.backgroundColor = "#FFF"
-                calc_result.innerHTML = BMR.toFixed()
+            if (input.value.length === 0 || parseFloat(input.value) === 0) {
+                input.classList.add('error')
+                allInputsFilled = false;
             }
         })
+
+        if (allInputsFilled) {
+            let BMR = calculateBMR()
+            calc_result.innerHTML = BMR.toFixed()
+        } else {
+            calc_result.innerHTML = '0'
+        }
     }
 })

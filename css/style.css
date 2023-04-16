@@ -752,6 +752,9 @@ a {
   -webkit-animation-duration: 1.5s;
   animation-duration: 1.5s; }
 
+.error {
+  background-color: red; }
+
 @-webkit-keyframes fade {
   from {
     opacity: 0.1; }
