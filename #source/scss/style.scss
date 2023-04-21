@@ -116,8 +116,9 @@ a {
 
 .sidepanel {
     position: fixed;
-    left: 60px;
-    top: 240px;
+    left: 5%;
+    bottom: 50%;
+    transform: translateY(50%);
     height: 400px;
     width: 25px;
     display: flex;
@@ -731,7 +732,7 @@ a {
     animation-duration: 1.5s;
 }
 
-.error{
+.error {
     background-color: red;
 }
 

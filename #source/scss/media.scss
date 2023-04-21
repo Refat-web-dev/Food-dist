@@ -40,9 +40,6 @@
         width: 200px;
     }
 
-    .sidepanel {
-        left: 30px;
-    }
 
     .promotion__timer .timer__block {
         width: 80px;
@@ -353,7 +350,6 @@
     .offer__advantages-text {
         margin-top: 15px;
         font-size: 14px;
-        text-align: center;
         line-height: 16px
     }
 
@@ -367,8 +363,9 @@
     }
 
     .offer .bgc_y {
-        width: 380px;
+        width: 100%;
     }
+
     .promotion .bgc_y {
         width: 55%;
         height: 600px;
@@ -452,4 +449,9 @@
         min-width: fit-content
     }
 
+    .sidepanel {
+     position: absolute;
+     bottom: -257%;
+     left: 0;
+    }
 }

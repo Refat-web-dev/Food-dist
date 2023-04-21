@@ -24,8 +24,6 @@
     width: 230px; }
   .btn {
     width: 200px; }
-  .sidepanel {
-    left: 30px; }
   .promotion__timer .timer__block {
     width: 80px;
     height: 100px;
@@ -225,7 +223,6 @@
   .offer__advantages-text {
     margin-top: 15px;
     font-size: 14px;
-    text-align: center;
     line-height: 16px; }
   .offer__slider {
     width: 100%;
@@ -233,7 +230,7 @@
   .offer__slide {
     height: 250px; }
   .offer .bgc_y {
-    width: 380px; }
+    width: 100%; }
   .promotion .bgc_y {
     width: 55%;
     height: 600px;
@@ -296,4 +293,8 @@
   .header__left-block {
     min-width: -webkit-fit-content;
     min-width: -moz-fit-content;
-    min-width: fit-content; } }
+    min-width: fit-content; }
+  .sidepanel {
+    position: absolute;
+    bottom: -257%;
+    left: 0; } }

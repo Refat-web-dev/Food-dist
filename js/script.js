@@ -415,3 +415,44 @@ function showTime(endTime, selector) {
     }
 }
 showTime(deadline, ".timer")
+
+// forms
+
+let forms = document.querySelectorAll('form')
+
+forms.forEach((form) => {
+    let inputs = form.querySelectorAll('input')
+
+    form.addEventListener('submit', (event) => {
+        event.preventDefault()
+
+        let allInputsFilled = true
+
+        inputs.forEach((input) => {
+            input.style.border = '2px solid blue'
+
+            if (input.value.length === 0) {
+                input.style.border = '2px solid red'
+                allInputsFilled = false
+            }
+        })
+
+        if (allInputsFilled) {
+            submit(form)
+        } else {
+            alert('Please fill in all fields')
+        }
+    })
+})
+
+function submit(form) {
+    let user = {}
+    let formData = new FormData(form)
+
+    formData.forEach((value, key) => {
+        user[key] = value
+    })
+
+    form.reset()
+    console.log(user)
+}
