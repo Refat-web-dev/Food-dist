@@ -372,7 +372,7 @@ function calcBMR() {
 //     }, 0);
 
 //timer
-const deadline = "2024-11-20T00:00:00";
+const deadline = "2024-10-20T00:00:00";
 
 function getTime(endTime) {
     const t = Date.parse(endTime) - Date.parse(new Date()),
