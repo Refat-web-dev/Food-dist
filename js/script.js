@@ -372,14 +372,14 @@ function calcBMR() {
 //     }, 0);
 
 //timer
-const deadline = "2024-12-20 00:00"
-function getTime(endTime) {
+const deadline = "2024-12-20T00:00:00";
 
-    const t = Date.parse(endTime) - Date.parse(new Date),
-        days = Math.floor((t / 1000) / 60 / 60 / 24),
-        hours = Math.floor((t / 1000) / 60 / 60 % 24),
-        minutes = Math.floor((t / 1000) / 60 % 60),
-        seconds = Math.floor((t / 1000) % 60);
+function getTime(endTime) {
+    const t = Date.parse(endTime) - Date.parse(new Date()),
+        days = Math.floor((t / (1000 * 60 * 60 * 24))),
+        hours = Math.floor((t / (1000 * 60 * 60) % 24)),
+        minutes = Math.floor((t / (1000 * 60) % 60)),
+        seconds = Math.floor((t / 1000 % 60));
 
     return {
         t,
@@ -387,34 +387,40 @@ function getTime(endTime) {
         hours,
         minutes,
         seconds
-    }
+    };
 }
+
 function showTime(endTime, selector) {
-    const timer = document.querySelector(selector),
-        days = timer.querySelector('#days'),
-        hours = timer.querySelector('#hours'),
-        minutes = timer.querySelector('#minutes'),
-        seconds = timer.querySelector('#seconds'),
-        interval = setInterval(setTime, 1000);
+    const timer = document.querySelector(selector);
+    const days = timer.querySelector('#days');
+    const hours = timer.querySelector('#hours');
+    const minutes = timer.querySelector('#minutes');
+    const seconds = timer.querySelector('#seconds');
 
     function setTime() {
-        const t = getTime(endTime)
-        days.innerHTML = t.days
-        hours.innerHTML = t.hours
-        minutes.innerHTML = t.minutes
-        seconds.innerHTML = t.seconds
-        if (t.t <= 0) {
-            days.innerHTML = '0'
-            hours.innerHTML = '0'
-            minutes.innerHTML = '0'
-            seconds.innerHTML = '0'
-            console.log(t.t);
-            clearInterval(interval)
-        }
+        const t = getTime(endTime);
+        days.innerHTML = t.days;
+        hours.innerHTML = t.hours;
+        minutes.innerHTML = t.minutes;
+        seconds.innerHTML = t.seconds;
 
+        if (t.t <= 0) {
+            days.innerHTML = '0';
+            hours.innerHTML = '0';
+            minutes.innerHTML = '0';
+            seconds.innerHTML = '0';
+            clearInterval(interval);
+        }
     }
+
+    const interval = setInterval(setTime, 1000);
+    setTime(); // Initial call to set time immediately
 }
-showTime(deadline, ".timer")
+
+document.addEventListener('DOMContentLoaded', () => {
+    showTime(deadline, ".timer");
+});
+
 
 // forms
 
